@@ -1,0 +1,22 @@
+{
+    "Parameters": {
+        "Path": "C:\\FOPRA\\ALEXQUADRAT",
+        "Dir_Label": "cwODMR",
+        "File_Label": "cwODMR",
+        "Repetitions": 1,
+        "Laser_Power_in_mW": 25.0,
+        "LockIn_Freq_Hz": 10000.0,
+        "LockIn_Phase": 0,
+        "MW_Power_dBm": 0.0,
+        "MW_Start_Freq_Hz": 2830000000.0,
+        "MW_Stop_Freq_Hz": 2930000000.0,
+        "MW_Freq_Step": 1000000.0,
+        "Wait_Betw_Steps_s": 0.1,
+        "Wait_Before_Measurement_s": 5.0,
+        "LockIn_Sensitivity": 5e-05,
+        "LockIn_Time_Constant": 0.1
+    },
+    "Info": {
+        "Created_Parent_Dir": "C:\\FOPRA\\ALEXQUADRAT\\20260122_140241_cwODMR"
+    }
+}

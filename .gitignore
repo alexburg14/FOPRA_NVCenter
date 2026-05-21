@@ -1,0 +1,18 @@
+# PDFs (copyrighted source material)
+*.pdf
+
+# Windows / Dropbox cruft
+desktop.ini
+Thumbs.db
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Local tooling
+.claude/
+
+#zips
+*.zip

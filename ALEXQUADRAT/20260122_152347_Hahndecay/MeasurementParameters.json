@@ -1,0 +1,24 @@
+{
+    "Parameters": {
+        "Path": "C:\\FOPRA\\ALEXQUADRAT",
+        "Dir_Label": "Hahndecay",
+        "File_Label": "Hahndecay",
+        "Repetitions": 1,
+        "Laser_Power": 8000,
+        "LockIn_Phase": 0.0,
+        "N_rep": 2,
+        "MW_Power_dB": 0.0,
+        "MW_Frequency_Hz": 2782500000.0,
+        "PI_Pulse_ns": 475,
+        "T_ns_Max": 10000,
+        "Steps_ns": 200,
+        "Laser_Length_ns": 5000,
+        "Wait_Betw_Steps_s": 1.1,
+        "Wait_Before_Measurement_s": 5.0,
+        "LockIn_Sensitivity": 5e-05,
+        "LockIn_Time_Constant": 1.0
+    },
+    "Info": {
+        "Created_Parent_Dir": "C:\\FOPRA\\ALEXQUADRAT\\20260122_152347_Hahndecay"
+    }
+}
