@@ -11,11 +11,12 @@
 *.run.xml
 *.synctex.gz
 
-# Scratch / diagnostic plots
-Rabi_0dB_compare.png
-Rabi_0dB_fft.png
+# PNGs anywhere except inside Ausarbeitung/
+*.png
+!Ausarbeitung/*.png
+
+# pickled fit results
 rabi_fits.npz
-rabi_fits.png
 
 # Windows / Dropbox cruft
 desktop.ini

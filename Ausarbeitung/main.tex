@@ -123,7 +123,25 @@ Für die Messung der Rabi-Sequenz wurde die kleinste Resonanzfrequenz aus der CW
 
 Es wird wieder die Resonanzfrequenz bei 2.785 GHz betrachtet. Diesmal wird die anregende 
 Mikrowellenleistung von -13 dB bis 7 dB verändert. Die sich ergebenden Messungen sind in
-Abbildung \ref{fig:Rabi-Zusatz} dargestellt. Für die Rabi-Frequenzen $f_R$ sowie die $\pi$-Pulsdauern $T_\pi$ ergibt sich:
+Abbildung \ref{fig:Rabi-Zusatz} dargestellt. Die gefitteten Rabi-Frequenzen $f_R$ sowie die $\pi$-Pulsdauern $T_\pi$ sind in Tabelle \ref{tab:rabi_fits} aufgelistet. Es ist zu erkennen, dass die Rabi-Frequenz mit steigender Anregungsleistung zunimmt, während die $\pi$-Pulsdauer abnimmt. Dies entspricht den theoretischen Erwartungen, da die Rabi-Frequenz linear proportional zur Mikrowellen-Amplitude $B_1$ ist ($\Omega_R = \gamma_e B_1$) und diese wiederum mit der Wurzel der Mikrowellenleistung skaliert ($B_1 \propto \sqrt{P_\mathrm{MW}}$). Eine höhere Anregungsleistung führt daher zu einer schnelleren Rotation des Spins auf der Blochkugel und damit zu einer kürzeren $\pi$-Pulsdauer.
+
+\begin{table}[htbp]
+    \centering
+    \sisetup{output-decimal-marker={,}}
+    \begin{tabular}{c S[table-format=1.3] S[table-format=4.0]}
+        \toprule
+        $P_\mathrm{MW}$ & {$f_\mathrm{Rabi}$ [\si{MHz}]} & {$T_\pi$ [\si{ns}]} \\
+        \midrule
+        $-13\,\si{dB}$           & 0.287 & 1744 \\
+        $-3\,\si{dB}$            & 0.831 &  602 \\
+        $\phantom{-}0\,\si{dB}$  & 1.048 &  477 \\
+        $+3\,\si{dB}$            & 1.259 &  397 \\
+        $+7\,\si{dB}$            & 1.472 &  340 \\
+        \bottomrule
+    \end{tabular}
+    \caption{Rabifrequenzen sowie $\pi$-Pulsdauern der Rabi-Sequenz-Messungen mit ihren jeweiligen Anregungsleistungen.}
+    \label{tab:rabi_fits}
+\end{table}
 
 \begin{figure}
     \centering
