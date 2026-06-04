@@ -1,5 +1,21 @@
-# PDFs (copyrighted source material)
-*.pdf
+# Source PDFs at root (copyrighted)
+/*.pdf
+
+# LaTeX build artifacts (keep .tex and figure PDFs)
+*.aux
+*.log
+*.toc
+*.fls
+*.fdb_latexmk
+*.bcf
+*.run.xml
+*.synctex.gz
+
+# Scratch / diagnostic plots
+Rabi_0dB_compare.png
+Rabi_0dB_fft.png
+rabi_fits.npz
+rabi_fits.png
 
 # Windows / Dropbox cruft
 desktop.ini
