@@ -82,7 +82,7 @@ Im ersten Teil des Experiments wird eine einfache CW-ODMR-Messung durchgeführt.
 \subsection{Rabi Sequenz}
 Für die Rabi Sequenz wird nun die gemessene Resonanzfrequenz aus der CW-ODMR Messung genutzt, wobei diese gepulst und in verschiedenen Zeitlängen auf den Diamanten angelegt. 
 \subsection{Hahn-Echo Sequenz}
-\subsection{Ramsey Sequenz}
+Die Hahn-Echo-Sequenz besteht aus drei Schritten: Zunächst wird ein $\pi/2$-Puls angewendet, um den Spin in die xy-Ebene der Blochkugel zu bringen. Danach folgt eine freie Präzession für eine Zeit $t$, gefolgt von einem $\pi$-Puls, welcher den Spin um 180 Grad dreht. Anschließend präzediert der Spin erneut für die gleiche Zeit $t$, bevor ein weiterer $\pi/2$-Puls zur Messung des Endzustands angewendet wird. Durch Variation der freien Präzessionszeit $t$ lässt sich die Dekohärenzzeit $T_2$ bestimmen, da die Amplitude des Echo-Signals mit zunehmender Zeit exponentiell abnimmt.
 
 \section{Ergebnisse und Diskussion}
 \subsection{CW ODMR Spektrum}
@@ -148,5 +148,30 @@ Abbildung \ref{fig:Rabi-Zusatz} dargestellt. Die gefitteten Rabi-Frequenzen $f_R
     \includegraphics[width=1\linewidth]{Rabi_Zusatz.png}
     \caption{Rabi Sequenz mit verschiedenen Mikrowellenleistungen}
     \label{fig:Rabi-Zusatz}
+\end{figure}
+
+
+\subsection{Hahn-Echo-Sequenz}
+Nachdem wir die Resonanzfrequenz und die $\pi$-Pulsdauer durch die cwODMR und Rabi-Sequenz-Messungen bestimmt haben, können wir nun die Hahn-Echo-Sequenz durchführen. Als ersten Versuch wurde bei fester $\tau_1$-Zeit von $\SI{2}{\micro\second}$ die $\tau_2$-Zeit variiert. Die gemessenen Daten sind in Abbildung \ref{fig:Hahn_Echo_Revival} dargestellt. Es ist zu erkennen, dass das Signal bei $\tau_2 = 2{,}30\pm0{,}03\,\si{\micro\second}$ ein Maximum aufweist. Dies ist das sogenannte \glqq Revival\grqq{} des Hahn-Echo-Signals, welches auftritt, wenn $\tau_2$ gleich $\tau_1$ ist. In diesem Fall kompensieren sich die Phasenfehler, welche während der freien Präzession durch statische Feldinhomogenitäten auftreten, gegenseitig und führen zu einer Wiederherstellung der Kohärenz des Spinsystems. Die kleine Verschiebung des Maximums gegenüber dem eingestellten $\tau_1$ um ca. $\SI{0.3}{\micro\second}$ lässt sich durch die endliche Pulsdauer erklären: Wird $\tau$ ab der Pulskante statt ab der Pulsmitte gezählt, ergibt die halbe $\pi$- plus die halbe $\pi/2$-Pulsdauer mit $T_\pi = \SI{475}{ns}$ gerade $\approx\SI{0.36}{\micro\second}$. Aus der Breite des Echos ($\sigma = 0{,}34\pm0{,}03\,\si{\micro\second}$) lässt sich zudem direkt die inhomogene Dephasierungszeit $T_2^* \approx \SI{0.3}{\micro\second}$ ablesen, da das Ensemble abseits der Refokussierungsbedingung auf genau dieser Zeitskala dephasiert.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.85\linewidth]{Hahn_Revival.pdf}
+    \caption{Hahn-Echo-Revival bei festem $\tau_1 = \SI{2}{\micro\second}$. Das Echo erscheint als Maximum bei $\tau_2 \approx \tau_1$ und wurde mit einer Gaußkurve gefittet.}
+    \label{fig:Hahn_Echo_Revival}
+\end{figure}
+
+Beim zweiten Versuch wurden $\tau_1$ und $\tau_2$ gleichzeitig variiert, sodass immer $\tau_1 = \tau_2 = \tau$ gilt. Die gemessenen Daten sind in Abbildung \ref{fig:Hahn_Echo_Decay} dargestellt. Die Amplitude des Hahn-Echo-Signals nimmt mit zunehmender freier Präzessionszeit ab. Gefittet wurde mit einer gestreckten Exponentialfunktion
+\begin{equation}
+    V(\tau) = A\,\exp\!\left[-\left(\frac{2\tau}{T_2}\right)^{\!n}\right] + C,
+    \label{eq:hahn_decay}
+\end{equation}
+wobei $2\tau$ die gesamte freie Präzessionszeit der Sequenz ist. Der Fit liefert eine Spin-Spin-Relaxationszeit von $T_2 = 5{,}85\pm0{,}10\,\si{\micro\second}$ mit Exponent $n = 1{,}98\pm0{,}10$. Der Exponent $n \approx 2$ (gaußförmiger statt rein exponentieller Zerfall mit $n=1$) ist typisch für NV-Ensembles in Diamant mit natürlichem $^{13}$C-Gehalt, deren Kernspinbad sich langsam im Vergleich zur Echodauer entwickelt. $T_2$ gibt an, wie lange das Spinsystem kohärent bleibt, bevor es durch Wechselwirkungen mit der Umgebung dekoheriert. Diese stellen die irreversiblen Verluste von Kohärenz dar, welche durch zeitlich fluktuierende Störungen wie z.B. das $^{13}$C-Kernspinbad oder Spin-Spin-Wechselwirkungen mit anderen Elektronenspins (P1-Zentren) verursacht werden und daher durch den $\pi$-Puls nicht refokussiert werden können. Wie erwartet gilt $T_2 \gg T_2^*$: Die Refokussierung hebt die statische Inhomogenität auf, übrig bleibt nur die irreversible Dekohärenz.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.85\linewidth]{Hahn_Decay.pdf}
+    \caption{Hahn-Echo-Decay mit $\tau_1 = \tau_2 = \tau$. Der Fit nach Gleichung~\eqref{eq:hahn_decay} liefert die Spin-Spin-Relaxationszeit $T_2 = 5{,}85\pm0{,}10\,\si{\micro\second}$.}
+    \label{fig:Hahn_Echo_Decay}
 \end{figure}
 \end{document}
