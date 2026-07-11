@@ -36,9 +36,9 @@
 \setlength{\parindent}{15pt}
 \setlength{\parskip}{0.3\baselineskip}
 
-\title{FOPRA - Electron spectroscopy of surfaces}
-\author{Alex Greck, Boyan Totev}
-\date{01.09.2025}
+\title{FOPRA - NV Zentren}
+\author{Alex Burg, Alex Greck, Ronja Malsy}
+\date{08.07.2026}
 
 \begin{document}
 
@@ -48,11 +48,12 @@
 \newpage
 
 \section{Einleitung}
+NV-Zentren stellen einen Quantensensor dar, welcher bespielsweise zur Messung von Magnetfeldern dienen kann. Im folgenden Experiment werden die Grundlagen von NV Zentren diskutiert und mit cwODMR Messungen, Rabi und Hahn-Echo Sequenzen einige mögliche Messprotokolle für NV-Zentren durchgeführt. Dadurch lassen sich die notwendigen Schritte sowie der spätere Ablauf einer Magnetfeldmessung mit NV-Zentren detailliert verstehen.
 
 \section{Theoretische Grundlagen}
 \subsection{Stickstoff-Fehlstellen-Zentren in Diamant}
 Stickstoff-Fehlstellen-Zentren sind Defektstellen in einer kristalinen Diamantstruktur, welche aus einer direkten Nachbarschaft einer Leerstelle und eines P1-Zentrums gebildet werden. Ein P1-Zentrum ist eine Defektstelle bestehend aus einem einzigen Stickstoff-Donator. Im neutralen Zustand enthält das NV (an der Fehlstelle) fünf Elektronen, wobei 3 von den angrenzenden Kohlenstoffatomen herrühren und zwei weitere vom benachbarten Stickstoff. In der Praxis relevant sind aber s.g. NV$^-$-Zentren welche ein zusätzliches Elektron aus dem Kristall aufnehmen und somit eine negative Ladung besitzen. Betrachtet man für die sechs-Elektron Konfiguration das Tight-Binding Modell und die Orbitalbesetzung stellt man fest, dass NV$^-$
-einen Gesamtspin von S=1 zu eigen haben und sowohl ein elektronischer Grundzustand $^3A_2$ als auch ein angeregter Zustand $^3E$ existieren. Außerdem können die Elektronenspins antiparallel zu einem Gesamtspin von S=1 koppeln. Üblicherweise spricht man von Singulet (S=0) und Triplet (S=1) Konfigurationen. Liegt zudem ein äußeres Magnetfeld an, spalten sich die Triplett-Zustände durch den Zeeman-Effekt in drei Feinstruktur-Niveaus auf, welche mit magnetischen Quantenzahlen $m_S$ nummeriert werden. Einen Überblick über die Level-Struktur von NV$^-$-Zentren liefert Abbildung \ref{fig:level structure}.
+einen Gesamtspin von S=1 zu eigen haben und sowohl ein elektronischer Grundzustand $^3A_2$ als auch ein angeregter Zustand $^3E$ existieren. Außerdem können die Elektronenspins antiparallel zu einem Gesamtspin von S=1 koppeln. Üblicherweise spricht man von Singulett (S=0) und Triplett (S=1) Konfigurationen. Liegt zudem ein äußeres Magnetfeld an, spalten sich die Triplett-Zustände durch den Zeeman-Effekt in drei Feinstruktur-Niveaus auf, welche mit magnetischen Quantenzahlen $m_S$ nummeriert werden. Einen Überblick über die Level-Struktur von NV$^-$-Zentren liefert Abbildung \ref{fig:level structure}.
 
 \begin{figure}
     \centering
@@ -61,7 +62,7 @@ einen Gesamtspin von S=1 zu eigen haben und sowohl ein elektronischer Grundzusta
     \label{fig:level structure}
 \end{figure}
 
-Allerdings ist ein Spinsystem allein völlig unpraktisch, insofern es nicht initialisiert, manipuliert und anschließend wieder ausgelesen werden kann. Diese Schritte erfolgen in diesem Praktikum durch optisches Pumpen mit grünem ($\lambda_{in} = ??$) Laserlicht. Dadurch wird das NV-Zentrum vom Grundzustand in den nächst höheren Zustand angeregt. Nun sind zwei verschiedene Prozesse möglich:
+Allerdings ist ein Spinsystem allein völlig unpraktisch, insofern es nicht initialisiert, manipuliert und anschließend wieder ausgelesen werden kann. Diese Schritte erfolgen in diesem Praktikum durch optisches Pumpen mit grünem ($\lambda_{in} = 517$) Laserlicht. Dadurch wird das NV-Zentrum vom Grundzustand in den nächst höheren Zustand angeregt. Nun sind zwei verschiedene Prozesse möglich:
 \begin{itemize}
     \item Gewöhliche Relaxation: Zum einen kann das NV-Zentrum gewöhnlich relaxieren ohne die Quantenzahlen $S$ und $m_S$ zu verändern. Nach dem Frank-Condon-Prinzip ändert sich aber die Wellenlänge des emittierten Lichts. Die gemessene Photoluminescence beträgt üblicherweise eine Wellenlänge von $637\,\si{nm}$ (rotes Licht).
     \item Inter-System-Crossing: Ein dazu konkurrierender Effekt ist das Inter-System-Crossing. Dabei untergeht das NV-Zentrum einen vermeindlich Spin-verbotenen Übergang vom Triplet zum Singulet Zustand. Dieser Übergang ist im sichtbaren Bereich nicht strahlend. Bemerkenswert ist hierbei, dass dabei auch ein Wechsel der magnetischen Quantenzahl von $m_s=1$ zu $m_s=0$ zu beobachten ist. Wie meistens in quantenmechanischen Prozessen git dies nur statistisch für den Erwartungswert abhängig von Übergangsraten.
@@ -72,20 +73,56 @@ Durch diese Zentrale Eigenschaft lässt sich nun ein Ensemble aus NV$^-$-Zentren
 Nach oder während eines Messung lässt sich auch der Endzustand des Ensembles auslesen, da sich durch Manipulation und Spin-Flips die Intensität der Photolumineszens ändert. Von dieser Helligkeitsänderung aus lässt sich auf den Besetzungszustand zurückschließen. 
 
 \subsection{Hamilton Operator und Verhalten im Magnetfeld}
+Die genaue Feinstrukturaufspaltung von NV-Zentren hängt außerdem von externen Faktoren wie Temperatur, magnetischen oder elektrischen Feldern usw. ab. Beschreiben lässt sich dies durch den Hamilton-Operator des Systems:
+\begin{equation}
+    \hat H = H_{ZFS} + H_B + H_e + ...
+\end{equation}
+Den größten Einfluss hat dabei ein äußeres Magnetfeld, auf welches wir uns im weiteren Experiment beschränken möchten. Der magnetfeldabhängige Teil des Hamilton-Operators entspricht dabei dem Zeeman-Term:
+\begin{equation}\label{eq:Zeeman}
+    H_\text{Zeeman}= g_e\mu_B\hat S_z B_0
+\end{equation}
+
+Dieser führt zu einer Aufspaltung der $m_S =\pm 1$ Niveaus, was folglich die Entartung aufhebt. Dadurch ändert sich schließlich auch die Mikrowellenfrequenz $w_\text{MW}$ zum Treiben des $m_S = 0$ nach $m_S=-1$ Übergangs. Aufgrund der symmetrischen Aufspaltung unterscheidet sich für ausreichend große Magnetfelder die Resonsanzfrequenz des $m_S = 0$ nach $m_S=+1$ davon deutlich, weshalb sich die NV-Zenten in diesem Fall effektiv als Zwei-Niveau-System beschreiben lassen.
+
 \subsection{Spindynamik und Darstellung auf der Blochkugel}
+Ein quantenmechanisches Zwei-Niveau-System lässt sich mithilfe der Blochlugel anschaulich visualisieren. Die Darstellung eines Spin $\frac{1}{2}$-Systems ist in Abbildung \ref{fig:Blochkugel} gezeigt. Damit lässt sich nun ein beliebiger (reiner) Quantenzustand 
+\begin{equation}
+    |\Psi\rangle = c_1 |\uparrow\rangle + c_2 |\downarrow\rangle = \cos{\frac{\theta}{2}}|\uparrow\rangle + e^{i\phi}
+\sin{\frac{\theta}{2}}|\downarrow\rangle
+\end{equation}
+als Vektor repräsentieren. Wie in der Tabelle dargestellt, entspricht der Zustand für $\theta=0 $ ($\pi$) dem Basiszustand $m_z=0$ (1). Die genaue Herleitung und Anwendung der Repräsentation soll hier nicht weiter ausgeführt werden. Details hierzu lassen sich in jeglicher Literatur zur Quantenphysik finden.
+
+Relevant für unser Experiment ist das Verhalten des Bloch-Vektors unter Einstrahlung von resonanten Mikrowellen. Diese führen dazu, dass sich der Bloch-Vektor entlang der Breitengrade bewegt und sich dementsrpechend der Winkel $\theta$ ändert. Für geeignete Pulsdauern lässen sich so Spins flippen (s.g. $\pi$-Puls) oder in die horizontale Ebene bringen ($\pi/2$-Puls), was eine Superposition erzeugt. Liegt eine solche Superposition vor, kommt es zur freien Evolution, welche eine relative Phase $\phi$ aufbaut. Abhängig von der akkumulierten Phase ändern sich die jeweiligen Vorfaktoren $c_1/c_2$ nachdem ein weiterer $\pi/2$-Puls angewandt wurde. Die führt schließlich zu teilweise geflippten Spins und somit zu einer Intensitätsänderung der Photolumineszens. Da die genauen Abläufe durch bekannte Hamiltonoperatoren beschrieben werden, lassen sich so Rückschlüsse auf eine externe Magnetfeldstärke ziehen.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{Blochkugel.png}
+    \caption{Darstellung eines Spin $\frac{1}{2}$-Systems mit einer Blochkugel}
+    \label{fig:Blochkugel}
+\end{figure}
 
 \section{Experimenteller Ablauf}
 \subsection{Experimenteller Aufbau}
-\subsection{CW-ODMR-Messung}
-Im ersten Teil des Experiments wird eine einfache CW-ODMR-Messung durchgeführt. Dabei wird ein gewisser Frequenzbereich der Radiowellenstrahlung durchlaufen und parallel die Photolumineszenz der Probe gemessen. Dadurch lassen sich die Reonanzfrequenzen zur jeweiligen Umgebungssituation ermitteln. Diese sind durch Dips im Photolumineszensspektrum ersichtlich. Zunächst wird eine Messung ohne externes Magnetfeld durchgeführt, anschließend wird ein Feld mit einem kleinen Permanentmagneten angelegt und die Messung wiederholt.
+Zentrales Element des Experiments ist eine Diamant, welcher NV-Zentren enthält. Dieser wird für die Initalisierung und Readout mit grünem Laserlicht ($\lambda=517\,\text{nm}$) bestrahlt. Durch interne Anregung und anschließende Relaxation der NV-Zentren kommt es zur Photolumineszens, wobei sich die Wellenlänge des emittierten Lichts hin zu $637\,$nm ändert. Durch einen dichroitischen Spiegel kann anschließend nach Wellenlänge seperiert werden und so die Intensität der Photolumineszens mit einem gewöhnlichen Photodetektor gemessen werden. Die Manipulation findet mithilfe von Mikrowellenstrahlung statt, welche über eine MW Antenne direkt über dem Diamant zugeführt wird. Entsprechende Mikrowellenfrequenzen sowie Pulssequenzen für Initialisierung, Manipulation und Readout werden durch externe Elektronik gesteuert.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{Versuchsaufbau.png}
+    \caption{Schematischer Versuchsaufbau für alle nachfolgenden Messungen mit NV-Zentren.}
+    \label{fig:Versuchsaufbau}
+\end{figure}
+
+
+\subsection{cwODMR-Messung}
+Im ersten Teil des Experiments wird eine einfache cwODMR-Messung durchgeführt. Dabei wird ein gewisser Frequenzbereich der Radiowellenstrahlung durchlaufen und parallel die Photolumineszenz der Probe gemessen. Dadurch lassen sich die Reonanzfrequenzen zur jeweiligen Umgebungssituation ermitteln. Diese sind durch Dips im Photolumineszensspektrum ersichtlich. Zunächst wird eine Messung ohne externes Magnetfeld durchgeführt, anschließend wird ein Feld mit einem kleinen Permanentmagneten angelegt und die Messung wiederholt.
 
 \subsection{Rabi Sequenz}
-Für die Rabi Sequenz wird nun die gemessene Resonanzfrequenz aus der CW-ODMR Messung genutzt, wobei diese gepulst und in verschiedenen Zeitlängen auf den Diamanten angelegt. 
+Für die Rabi Sequenz wird nun die gemessene Resonanzfrequenz aus der cwODMR Messung genutzt, wobei diese gepulst und in verschiedenen Zeitlängen auf den Diamanten angelegt wird. 
 \subsection{Hahn-Echo Sequenz}
 Die Hahn-Echo-Sequenz besteht aus drei Schritten: Zunächst wird ein $\pi/2$-Puls angewendet, um den Spin in die xy-Ebene der Blochkugel zu bringen. Danach folgt eine freie Präzession für eine Zeit $t$, gefolgt von einem $\pi$-Puls, welcher den Spin um 180 Grad dreht. Anschließend präzediert der Spin erneut für die gleiche Zeit $t$, bevor ein weiterer $\pi/2$-Puls zur Messung des Endzustands angewendet wird. Durch Variation der freien Präzessionszeit $t$ lässt sich die Dekohärenzzeit $T_2$ bestimmen, da die Amplitude des Echo-Signals mit zunehmender Zeit exponentiell abnimmt.
 
 \section{Ergebnisse und Diskussion}
-\subsection{CW ODMR Spektrum}
+\subsection{cwODMR Spektrum}
 In einem ersten Schritt wurde die Resonanzfrequenz für Spin-Flips bestimmt. Für den Fall, dass kein äußeres Magnetfeld existiert muss diese dem Zero-Field-Splitting von $f_0=2,87\,\si{GHz}$ entsprechen. Daher wurde zunächst ohne angelegtes Magnetfeld eine CM-ODMR Messung im Bereich von $2,83$ -$2,93 \,\si{GHz}$ durchgeführt. Die Ergebnisse sind in Abbildung \ref{fig:ESR_ohne_Signal} dargestellt. Ein mit der Datenpunkte mit einer geeigneten Lorentzkurve ergeben eine experimentelle Resonanzfrequenz von $2.870\pm0.001 \,\si{GHz}$, was perfekt mit den theoretischen Erwartungen übereinstimmt. An dieser Stelle soll erwähnt werden, dass im Labor das externe Magnetfeld nicht völlig abgeschirmt werden konnte, sonder mindestens das Erdmagnetfeld vorhanden war. Dieses beträg in München ungefähr $50 \,\si{\mu T}$. Die Zemann-Aufspaltung der S=1 Niveaus ist proportional zu $28\,\si{GHz}$ pro Tesla. Setzt man die Werte ein, liefert das eine zu erwartende Abweichung von $1,4\,\si{MHz}$. Diese Abweichung ist so klein, dass sie praktisch nicht gemessen wird bzw. in der Unsicherheit verschwindet. Zudem beträgt der Spin-Kontrast (Baseline - Min. Dip) von -6.4\% auf. Die Halbwertsbreite wurde auf $9,62\pm0.18 \,\si{MHz}$ bestimmt. Diese ist in unserer experimentellen Umgebung haptsächlich von Temperatur, $^{13}\text{C}$ Konzentration sowie P1-Zentren Konzentration ($^{15}\text{N}$) und ggf. dem Power Broadening abhängig.
 
 \begin{figure}[htbp]
@@ -103,15 +140,15 @@ In einem ersten Schritt wurde die Resonanzfrequenz für Spin-Flips bestimmt. Fü
         \label{fig:ESR_mit_Signal}
     \end{subfigure}
     
-    \caption{CW-ODMR-Messungen zur Bestimmung der Resonanzfrequenz ohne und mit angelegtem externen Magnetfeld.}
+    \caption{cwODMR-Messungen zur Bestimmung der Resonanzfrequenz ohne und mit angelegtem externen Magnetfeld.}
     \label{fig:ESR_Gesamt} % Optional: Added a label for the whole figure
 \end{figure}
-Anschließend wurde ein externes, statisches Magnetfeld in Form eines kleinen Permanentmagneten angelegt. Eine erneute CW-ODMR-Messung im Frequenzbereich von $2,73$ -$3,03 \,\si{GHz}$ liefert folgendes Bild \ref{fig:ESR_mit_Signal}. Wie unschwer zu erkennen ist, wurde der einzelne Dip für den magnetfeldfreien Fall in vier seperate Dips aufgespalten. Die Aufspaltung erfolgt dabei symmetrisch um $f_0$. Die beiden inneren Peaks sind um $3.5\pm0.3\,\si{MHz}$ verschoben und weist eine Dip-Tiefe von ca. 6 auf. Die äußeren Dips dahingegen haben sich um $90,0\pm0,2\,\si{MHz}$ im Vergleich zur vorherigen Messung nach außen bewegt. Die Diptiefe liegt dabei bei ca. 4.5 (links) und 3.5 (rechts). Die unterschiedlichen Intensitäten entsprechen dabei auch den Erwartungen. Wegen dem äußeren Magnetfeld lässt sich eine Vorzugsrichtugn im Diamant definieren. Für diese Messung relevant sind nun die Anteile, welche parallel zur Achse des NV-Zentrums liegen. Da in Diamant vier verschiedene Orientierungen vorliegen, können im CW-ODMR-Spektrum richtugnsabhängig bis zu acht Resonanzen festgestellt werden. Wählt man dagegen eine Magnetfeldrichtung parallel zu einer NV-Achse werden nur noch vier Dips beobachtet, wobei aus Symmetriegründen die innenren Dips die dreifache Intensität aufweisen sollten. Unsere Messungen bestätigen die Aufspaltung in vier Resonanzen mit jeweils paarweise unterschiedlichen Intensitäten, welche aber nicht ganz dem zu erwartenden Verhältnis von 1:3 entsprechen.
+Anschließend wurde ein externes, statisches Magnetfeld in Form eines kleinen Permanentmagneten angelegt. Eine erneute cwODMR-Messung im Frequenzbereich von $2,73$ -$3,03 \,\si{GHz}$ liefert folgendes Bild \ref{fig:ESR_mit_Signal}. Wie unschwer zu erkennen ist, wurde der einzelne Dip für den magnetfeldfreien Fall in vier seperate Dips aufgespalten. Die Aufspaltung erfolgt dabei symmetrisch um $f_0$. Die beiden inneren Peaks sind um $3.5\pm0.3\,\si{MHz}$ verschoben und weist eine Dip-Tiefe von ca. 6 auf. Die äußeren Dips dahingegen haben sich um $90,0\pm0,2\,\si{MHz}$ im Vergleich zur vorherigen Messung nach außen bewegt. Die Diptiefe liegt dabei bei ca. 4.5 (links) und 3.5 (rechts). Die unterschiedlichen Intensitäten entsprechen dabei auch den Erwartungen. Wegen dem äußeren Magnetfeld lässt sich eine Vorzugsrichtugn im Diamant definieren. Für diese Messung relevant sind nun die Anteile, welche parallel zur Achse des NV-Zentrums liegen. Da in Diamant vier verschiedene Orientierungen vorliegen, können im cwODMR-Spektrum richtugnsabhängig bis zu acht Resonanzen festgestellt werden. Wählt man dagegen eine Magnetfeldrichtung parallel zu einer NV-Achse werden nur noch vier Dips beobachtet, wobei aus Symmetriegründen die innenren Dips die dreifache Intensität aufweisen sollten. Unsere Messungen bestätigen die Aufspaltung in vier Resonanzen mit jeweils paarweise unterschiedlichen Intensitäten, welche aber nicht ganz dem zu erwartenden Verhältnis von 1:3 entsprechen.
 
-Ausgehend von diesen Überlegungen lässt sich das externe Magnetfeld abschätzen. Unter der Annahme, dass die äußeren Peaks einer parallelen Magnetfeldorientierung entsprechen ergibt sich mit Formel (\ref{}) eine Feldstärke von $3,2\,\si{mT}$. Dieses Resultat ist verhältnismäßig für einen kleinen Neodym-Permanentmagneten, mit welchem das externe Magnetfeld angelegt wurde.
+Ausgehend von diesen Überlegungen lässt sich das externe Magnetfeld abschätzen. Unter der Annahme, dass die äußeren Peaks einer parallelen Magnetfeldorientierung entsprechen ergibt sich mit Formel (\ref{eq:Zeeman}) eine Feldstärke von $3,2\,\si{mT}$. Dieses Resultat ist verhältnismäßig für einen kleinen Neodym-Permanentmagneten, mit welchem das externe Magnetfeld angelegt wurde.
 
 \subsection{Rabi-Sequenz}
-Für die Messung der Rabi-Sequenz wurde die kleinste Resonanzfrequenz aus der CW-ODMR Messung mit einer Frequenz von $f = \SI{2.785}{GHz}$ verwendet. Die gemessenen Daten sind in Abbildung \ref{fig:Rabi_0dB} dargestellt. Es ist ersichtlich, dass es sich hierbei um eine gedämpfte Kosinusschwingung handelt. Durch einen Fit erhält man eine Rabi-Frequenz von $f_R = \SI{1.05}{MHz}$ und eine Pi-Pulsdauer von $T_\pi = \SI{477}{ns}$.
+Für die Messung der Rabi-Sequenz wurde die kleinste Resonanzfrequenz aus der cwODMR Messung mit einer Frequenz von $f = \SI{2.785}{GHz}$ verwendet. Die gemessenen Daten sind in Abbildung \ref{fig:Rabi_0dB} dargestellt. Es ist ersichtlich, dass es sich hierbei um eine gedämpfte Cosinusschwingung handelt. Durch einen Fit erhält man eine Rabi-Frequenz von $f_R = \SI{1.05}{MHz}$ und eine Pi-Pulsdauer von $T_\pi = \SI{477}{ns}$.
 
 \begin{figure}
     \centering

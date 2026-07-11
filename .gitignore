@@ -31,6 +31,6 @@ __pycache__/
 # Local tooling
 .claude/
 CLAUDE.md
-
+.cc-history
 #zips
 *.zip
