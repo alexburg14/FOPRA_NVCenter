@@ -187,6 +187,19 @@ Abbildung \ref{fig:Rabi-Zusatz} dargestellt. Die gefitteten Rabi-Frequenzen $f_R
     \label{fig:Rabi-Zusatz}
 \end{figure}
 
+Zur quantitativen Überprüfung der erwarteten Proportionalität $f_R \propto \sqrt{P_\mathrm{MW}}$ ist in Abbildung \ref{fig:Rabi_loglog} die Rabifrequenz doppelt-logarithmisch gegen die Mikrowellenleistung aufgetragen. Da die Leistungsangabe in dB bereits logarithmisch ist, wurde sie dazu zunächst in eine lineare (relative) Leistung $P = 10^{P[\mathrm{dB}]/10}$ umgerechnet. In dieser Darstellung wird aus dem Potenzgesetz $f_R \propto P^{m}$ eine Gerade mit Steigung $m$, wobei theoretisch $m = 0{,}5$ zu erwarten ist. Ein linearer Fit an alle fünf Messpunkte liefert jedoch
+\begin{equation}
+    m = 0{,}366 \pm 0{,}040,
+    \label{eq:rabi_slope}
+\end{equation}
+also eine signifikant flachere Steigung. Der Grund dafür ist in Abbildung \ref{fig:Rabi_loglog} direkt erkennbar: Die Messpunkte bei hoher Leistung ($+3$ und $+7\,\si{dB}$) fallen zunehmend unter die Referenzgerade mit Steigung $0{,}5$. Dies deutet auf eine Sättigung des Mikrowellenverstärkers hin. Beschränkt man den Fit auf den Niedrigleistungsbereich ($P \leq 0\,\si{dB}$), ergibt sich mit $m = 0{,}44 \pm 0{,}02$ ein Wert deutlich näher an der theoretischen Erwartung.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.85\linewidth]{Rabi_loglog.pdf}
+    \caption{Rabifrequenz $f_R$ als Funktion der (relativen) Mikrowellenleistung in doppelt-logarithmischer Darstellung. Der Fit über alle Punkte (rot) liefert eine Steigung von $0{,}366\pm0{,}040$ statt der erwarteten $0{,}5$ (graue Referenzgerade); die Abweichung bei hoher Leistung deutet auf Verstärkersättigung hin.}
+    \label{fig:Rabi_loglog}
+\end{figure}
 
 \subsection{Hahn-Echo-Sequenz}
 Nachdem wir die Resonanzfrequenz und die $\pi$-Pulsdauer durch die cwODMR und Rabi-Sequenz-Messungen bestimmt haben, können wir nun die Hahn-Echo-Sequenz durchführen. Als ersten Versuch wurde bei fester $\tau_1$-Zeit von $\SI{2}{\micro\second}$ die $\tau_2$-Zeit variiert. Die gemessenen Daten sind in Abbildung \ref{fig:Hahn_Echo_Revival} dargestellt. Es ist zu erkennen, dass das Signal bei $\tau_2 = 2{,}30\pm0{,}03\,\si{\micro\second}$ ein Maximum aufweist. Dies ist das sogenannte \glqq Revival\grqq{} des Hahn-Echo-Signals, welches auftritt, wenn $\tau_2$ gleich $\tau_1$ ist. In diesem Fall kompensieren sich die Phasenfehler, welche während der freien Präzession durch statische Feldinhomogenitäten auftreten, gegenseitig und führen zu einer Wiederherstellung der Kohärenz des Spinsystems. Die kleine Verschiebung des Maximums gegenüber dem eingestellten $\tau_1$ um ca. $\SI{0.3}{\micro\second}$ lässt sich durch die endliche Pulsdauer erklären: Wird $\tau$ ab der Pulskante statt ab der Pulsmitte gezählt, ergibt die halbe $\pi$- plus die halbe $\pi/2$-Pulsdauer mit $T_\pi = \SI{475}{ns}$ gerade $\approx\SI{0.36}{\micro\second}$. Aus der Breite des Echos ($\sigma = 0{,}34\pm0{,}03\,\si{\micro\second}$) lässt sich zudem direkt die inhomogene Dephasierungszeit $T_2^* \approx \SI{0.3}{\micro\second}$ ablesen, da das Ensemble abseits der Refokussierungsbedingung auf genau dieser Zeitskala dephasiert.
